@@ -197,7 +197,7 @@ function renderRun() {
 }
 
 function render() {
-  if (!state) { renderTitle(); return; }
+  if (!state) { renderTitle(); if (window.VIS) VIS.sinkron(null); return; }
   if (state.phase === 'gameover' || state.phase === 'victory') {
     if (!state.metaApplied) {
       state.newUnlocks = E.finishRunMeta(meta, state);
@@ -206,9 +206,11 @@ function render() {
     }
     document.getElementById('hud').className = 'tersembunyi';
     app().innerHTML = sceneEnd(state.phase === 'victory');
+    if (window.VIS) VIS.sinkron(state);
     return;
   }
   renderRun();
+  if (window.VIS) VIS.sinkron(state);
 }
 
 /* ---------- tindakan ---------- */
@@ -239,8 +241,28 @@ var aksi = {
 document.getElementById('app').addEventListener('click', function (ev) {
   var b = ev.target.closest('[data-act]');
   if (!b || b.disabled) return;
-  var fn = aksi[b.getAttribute('data-act')];
-  if (fn) fn(b);
+  var act = b.getAttribute('data-act');
+  var fn = aksi[act];
+  if (!fn) return;
+  /* --- konteks pra-aksi untuk memicu animasi potret (lapisan visual v2) --- */
+  var hp0 = state ? state.player.hp : null;
+  var emas0 = state ? state.player.gold : null;
+  var fase0 = state ? state.phase : null;
+  var pilihanEvent = null;
+  if (act === 'event' && state && state.event) pilihanEvent = state.event.choices[parseInt(b.getAttribute('data-i'), 10)];
+  fn(b);
+  if (!window.VIS || !state) return;
+  if (act === 'serang' || act === 'skill') VIS.mainkan('serang', 520);
+  if (hp0 !== null && state.player.hp < hp0 && fase0 === 'combat') VIS.mainkan('terluka', 720);
+  if (fase0 === 'combat' && state.phase === 'reward') VIS.mainkan('senyum', 900);
+  else if (act === 'hadiah') VIS.mainkan('angguk', 650);
+  else if (act === 'event') {
+    var berisiko = pilihanEvent && (pilihanEvent.roll || (pilihanEvent.fx && ((pilihanEvent.fx.hp || 0) < 0 || (pilihanEvent.fx.maxHp || 0) < 0)));
+    VIS.mainkan(berisiko ? 'khawatir' : 'angguk', 900);
+  }
+  else if (act === 'istirahat') VIS.mainkan('senyum', 1200);
+  else if (act === 'beli' && emas0 !== null && state.player.gold < emas0) VIS.mainkan('senyum', 1000);
+  else if (act === 'naik' || act === 'pergi') VIS.mainkan('angguk', 600);
 });
 
 /* ---------- kait QA (tangkapan layar & uji) ---------- */
@@ -258,6 +280,15 @@ function qaSetup() {
     state.log.push({ text: 'Ksatria Berkarat menyerang mengenai kamu sebesar 6.', cls: 'bad' });
   } else if (QA === 'boss') {
     state.floor = 7; state.player.hp = 52; E.nextFloor(state);
+  } else if (QA === 'bg2') {
+    state.floor = 12; state.phase = 'travel'; // Bab II, pita 2
+    state.log.push({ text: 'Tangga besi berdenyit di bawah sepatumu.', cls: 'story' });
+  } else if (QA === 'bg3') {
+    state.floor = 23; state.phase = 'travel'; // Bab III, pita 3 (puncak)
+    state.player.hp = 40;
+    state.log.push({ text: 'Udara menipis. Di atas, aurora menari di celah menara.', cls: 'story' });
+  } else if (QA === 'kalah') {
+    state.floor = 11; state.player.hp = 0; state.phase = 'gameover';
   }
 }
 if (QA) { qaSetup(); render(); }

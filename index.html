@@ -29,10 +29,24 @@
     <span class="hud-senjata" id="hud-peralatan"></span>
   </div>
 </header>
+<section id="panggung" class="tersembunyi kosong bab-1 pita-1" aria-hidden="true">
+  <div class="latar" id="latar-a"></div>
+  <div class="latar" id="latar-b"></div>
+  <div class="panggung-tint"></div>
+  <figure class="potret potret-pahlawan tersembunyi" id="bingkai-pahlawan">
+    <div class="bingkai-dalam"><img class="isi-potret" id="img-pahlawan" alt="Saka, penjaga lentera terakhir"><img class="bingkai-atas" src="aset-pixel/ui/bingkai-kartu.png" alt="" aria-hidden="true"></div>
+    <figcaption>Saka · Penjaga Lentera</figcaption>
+  </figure>
+  <figure class="potret potret-musuh tersembunyi" id="bingkai-musuh">
+    <div class="bingkai-dalam"><img class="isi-potret" id="img-musuh" alt=""><img class="bingkai-atas" src="aset-pixel/ui/bingkai-kartu.png" alt="" aria-hidden="true"></div>
+    <figcaption id="nama-musuh"></figcaption>
+  </figure>
+</section>
 <main id="app"></main>
 <footer id="kaki">Menara Musim Abadi — cerita &amp; dunia original berbahasa Indonesia.<br>Progres tersimpan otomatis di peramban ini.</footer>
 <script src="data.js"></script>
 <script src="engine.js"></script>
+<script src="visual.js"></script>
 <script src="game.js"></script>
 </body>
 </html>

@@ -40,6 +40,41 @@ h1,h2,.serif{font-family:Georgia,"Times New Roman",serif}
 .hud-stat b{color:var(--teks)}
 .hud-senjata{margin-left:auto; font-size:.8rem}
 
+/* ---------- Panggung visual (v2): latar adaptif + potret pixel art ---------- */
+#panggung{position:relative; z-index:1; max-width:480px; margin:0 auto 4px; height:248px;
+  border:1px solid var(--garis); border-radius:14px; overflow:hidden;
+  background:linear-gradient(180deg,#101b38,#0a1122); box-shadow:0 8px 28px rgba(0,0,0,.4)}
+#panggung.kosong{display:none}
+#panggung .latar{position:absolute; inset:0; background-size:cover; background-position:center bottom;
+  image-rendering:pixelated; opacity:0; transition:opacity .9s ease}
+#panggung .latar.tampak{opacity:1}
+#panggung.pita-2 .latar{filter:brightness(.93)}
+#panggung.pita-3 .latar{filter:brightness(.86) saturate(1.12)}
+#panggung .panggung-tint{position:absolute; inset:0; pointer-events:none; transition:background 1.2s ease;
+  background:linear-gradient(180deg, rgba(10,15,30,.05) 55%, rgba(6,10,22,.55) 100%)}
+#panggung.bab-2 .panggung-tint{background:linear-gradient(180deg, rgba(46,26,8,.10) 55%, rgba(10,8,18,.55) 100%)}
+#panggung.bab-3 .panggung-tint{background:linear-gradient(180deg, rgba(64,32,96,.12) 40%, rgba(6,10,22,.5) 100%)}
+.potret{position:absolute; bottom:8px; margin:0; text-align:center}
+/* Bingkai kartu Kuas (ui/bingkai-kartu.png, 80x100): lubang potret di
+   offset 10%/10% berukuran 80%x80% — potret ditaruh persis di lubangnya,
+   gambar bingkai ditumpuk di atasnya. */
+.potret .bingkai-dalam{position:relative; aspect-ratio:4/5; background:#22304f; border-radius:4px;
+  box-shadow:0 6px 18px rgba(0,0,0,.55); line-height:0}
+.potret .isi-potret{position:absolute; left:10%; top:10%; width:80%; height:80%;
+  image-rendering:pixelated; object-fit:cover}
+.potret-musuh .isi-potret{object-fit:contain}
+.potret .bingkai-atas{position:absolute; inset:0; width:100%; height:100%;
+  image-rendering:pixelated; pointer-events:none}
+.potret figcaption{margin-top:5px; font-size:.68rem; letter-spacing:.04em; color:#e8eefc;
+  text-shadow:0 1px 3px #000, 0 0 8px rgba(0,0,0,.8); font-weight:600}
+.potret-pahlawan{left:10px; width:88px}
+.potret-musuh{right:10px; width:68px}
+.potret-musuh.bos{width:108px}
+.potret-musuh.bos .isi-potret{animation:napas-bos 2.6s ease-in-out infinite}
+@keyframes napas-bos{0%,100%{transform:scale(1)}50%{transform:scale(1.035)}}
+@media (max-width:380px){ #panggung{height:232px} .potret-pahlawan{width:78px}
+  .potret-musuh{width:60px} .potret-musuh.bos{width:94px} }
+
 /* ---------- Kartu & adegan ---------- */
 .kartu{background:linear-gradient(180deg,var(--kartu2),var(--kartu)); border:1px solid var(--garis); border-radius:14px; padding:16px; margin:12px 0; box-shadow:0 6px 24px rgba(0,0,0,.35)}
 .ikon-besar{font-size:64px; text-align:center; line-height:1.15; filter:drop-shadow(0 0 18px rgba(159,216,232,.35))}
