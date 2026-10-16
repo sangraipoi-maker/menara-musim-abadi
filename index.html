@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0a0f1e">
+<title>Menara Musim Abadi — Roguelike Teks Bahasa Indonesia</title>
+<meta name="description" content="Game web roguelike RPG berbasis teks berbahasa Indonesia. Naiki Menara Sunyi, akhiri musim dingin abadi.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏮</text></svg>">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="salju" aria-hidden="true"></div>
+<header id="hud" class="tersembunyi">
+  <div class="hud-baris">
+    <span id="hud-lantai" class="hud-item">Lantai 1/24</span>
+    <span id="hud-bab" class="hud-item hud-bab">Bab I</span>
+    <span id="hud-emas" class="hud-item">💰 0</span>
+    <span id="hud-ramuan" class="hud-item">🧪 0</span>
+  </div>
+  <div class="hud-baris">
+    <div class="bar-hp"><div id="hud-hp-isi"></div><span id="hud-hp-teks">64/64</span></div>
+  </div>
+  <div class="hud-baris hud-stat">
+    <span>⚔️ <b id="hud-atk">9</b></span>
+    <span>🛡️ <b id="hud-def">2</b></span>
+    <span>🔋 <b id="hud-tenaga">3/5</b></span>
+    <span id="hud-blok"></span>
+    <span class="hud-senjata" id="hud-peralatan"></span>
+  </div>
+</header>
+<main id="app"></main>
+<footer id="kaki">Menara Musim Abadi — cerita &amp; dunia original berbahasa Indonesia.<br>Progres tersimpan otomatis di peramban ini.</footer>
+<script src="data.js"></script>
+<script src="engine.js"></script>
+<script src="game.js"></script>
+</body>
+</html>
