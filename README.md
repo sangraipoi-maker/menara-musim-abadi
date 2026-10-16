@@ -23,7 +23,7 @@ dan satu-satunya cara mengakhirinya adalah menaiki **Menara Sunyi** di ujung uta
 ## Isi v1
 
 - 3 Bab × 8 lantai = 24 lantai, masing-masing ditutup bos
-- 24 musuh unik (15 biasa, 6 elite, 3 bos) · 14 event cerita bercabang
+- 24 musuh unik (15 biasa, 6 elite, 3 bos) · 15 event cerita bercabang
 - 5 keahlian · 18 sifat (11 di tengah run + 7 sifat awal meta) · 5 senjata & 4 zirah berjenjang
 - Pedagang, peristirahatan, jebakan/dadu keberuntungan, sifat awal yang bisa dibuka permanen
 
